@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="ARUANI Repuestos para motos en Mendoza">
+
+<title>ARUANI Repuestos | Catálogo Online</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet" href="css/estilos.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="topbar">
+
+<div class="contenedor">
+
+<div class="logo">
+
+<img src="imagenes/logo.png" alt="ARUANI">
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="#inicio">Inicio</a></li>
+
+<li><a href="#destacados">Destacados</a></li>
+
+<li><a href="#catalogo">Catálogo</a></li>
+
+<li><a href="#marcas">Marcas</a></li>
+
+<li><a href="#nosotros">Nosotros</a></li>
+
+<li><a href="#contacto">Contacto</a></li>
+
+</ul>
+
+</nav>
+
+<a class="botonWhatsapp"
+
+href="https://wa.me/5492610000000"
+
+target="_blank">
+
+<i class="fab fa-whatsapp"></i>
+
+Consultar
+
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="hero" id="inicio">
+
+<div class="hero-overlay"></div>
+
+<div class="contenedor hero-grid">
+
+<div class="hero-texto">
+
+<span class="etiqueta">
+
+Repuestos originales y alternativos
+
+</span>
+
+<h1>
+
+El catálogo más completo
+
+para tu moto
+
+</h1>
+
+<p>
+
+Miles de repuestos para Honda,
+
+Yamaha,
+
+Bajaj,
+
+Motomel,
+
+Corven,
+
+Gilera,
+
+Benelli,
+
+CFMoto,
+
+KTM
+
+y muchas marcas más.
+
+</p>
+
+<div class="hero-botones">
+
+<a href="#catalogo"
+
+class="btn amarillo">
+
+Ver Catálogo
+
+</a>
+
+<a href="#contacto"
+
+class="btn negro">
+
+Contactar
+
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-imagen">
+
+<img
+
+src="imagenes/hero.png"
+
+alt="Moto">
+
+</div>
+
+</div>
+
+</section>
+
+<section class="busqueda">
+
+<div class="contenedor">
+
+<div class="buscador">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+
+type="text"
+
+id="buscar"
+
+placeholder="Buscar repuesto...">
+
+</div>
+
+</div>
+
+</section>
+
+<section id="marcas">
+
+<div class="contenedor">
+
+<h2>
+
+Marcas disponibles
+
+</h2>
+
+<div class="marcas-grid">
+
+<button data-marca="Todas">Todas</button>
+
+<button data-marca="Honda">Honda</button>
+
+<button data-marca="Yamaha">Yamaha</button>
+
+<button data-marca="Bajaj">Bajaj</button>
+
+<button data-marca="Suzuki">Suzuki</button>
+
+<button data-marca="Motomel">Motomel</button>
+
+<button data-marca="Corven">Corven</button>
+
+<button data-marca="Gilera">Gilera</button>
+
+<button data-marca="Benelli">Benelli</button>
+
+<button data-marca="KTM">KTM</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="destacados">
+
+<div class="contenedor">
+
+<div class="titulo">
+
+<h2>
+
+Productos destacados
+
+</h2>
+
+<p>
+
+Los productos más buscados por nuestros clientes.
+
+</p>
+
+</div>
+
+<div class="slider"
+
+id="sliderDestacados">
+
+</div>
+
+</div>
+
+</section>
+
+<section id="catalogo">
+
+<div class="contenedor">
+
+<div class="catalogo-header">
+
+<h2>
+
+Catálogo
+
+</h2>
+
+<span id="contador">
+
+0 Productos
+
+</span>
+
+</div>
+
+<div id="productos"
+
+class="productos-grid">
+
+</div>
+
+</div>
+
+</section>
+    </div>
+</section>
+
+<!-- ========================================= -->
+<!-- NOSOTROS -->
+<!-- ========================================= -->
+
+<section class="nosotros" id="nosotros">
+
+    <div class="contenedor">
+
+        <div class="nosotros-grid">
+
+            <div class="nosotros-img">
+
+                <img src="imagenes/local.jpg" alt="Local ARUANI">
+
+            </div>
+
+            <div class="nosotros-info">
+
+                <span class="subtitulo">
+                    SOBRE NOSOTROS
+                </span>
+
+                <h2>
+                    Más de 10 años ofreciendo repuestos para motos.
+                </h2>
+
+                <p>
+
+                    En ARUANI trabajamos todos los días para brindar
+                    repuestos originales y alternativos de excelente calidad,
+                    con asesoramiento personalizado para cada cliente.
+
+                </p>
+
+                <p>
+
+                    Nuestro objetivo no es solamente vender un repuesto,
+                    sino ayudarte a encontrar exactamente la pieza correcta
+                    para tu moto.
+
+                </p>
+
+                <div class="estadisticas">
+
+                    <div>
+
+                        <h3>5000+</h3>
+
+                        <span>Productos</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3>10+</h3>
+
+                        <span>Años</span>
+
+                    </div>
+
+                    <div>
+
+                        <h3>100%</h3>
+
+                        <span>Compromiso</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- CONTACTO -->
+<!-- ========================================= -->
+
+<section class="contacto" id="contacto">
+
+    <div class="contenedor">
+
+        <div class="titulo-seccion">
+
+            <span>
+                CONTACTO
+            </span>
+
+            <h2>
+                Estamos para ayudarte
+            </h2>
+
+        </div>
+
+        <div class="contacto-grid">
+
+            <div class="info-contacto">
+
+                <div class="dato">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <div>
+
+                        <h4>Dirección</h4>
+
+                        <p>
+                            Mendoza, Argentina
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="dato">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <div>
+
+                        <h4>Teléfono</h4>
+
+                        <p>
+                            +54 9 261 XXX XXXX
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="dato">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    <div>
+
+                        <h4>Horarios</h4>
+
+                        <p>
+
+                            Lunes a Viernes
+
+                            <br>
+
+                            08:30 a 18:30
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <a
+
+                    href="https://wa.me/5492610000000"
+
+                    target="_blank"
+
+                    class="btnWhatsappGrande">
+
+                    <i class="fab fa-whatsapp"></i>
+
+                    Consultar por WhatsApp
+
+                </a>
+
+            </div>
+
+            <div class="mapa">
+
+                <iframe
+
+                    src="https://www.google.com/maps/embed?pb="
+
+                    loading="lazy"
+
+                    allowfullscreen>
+
+                </iframe>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- FOOTER -->
+<!-- ========================================= -->
+
+<footer>
+
+    <div class="contenedor">
+
+        <div class="footer-grid">
+
+            <div>
+
+                <img
+
+                    src="imagenes/logo.png"
+
+                    class="footer-logo"
+
+                    alt="ARUANI">
+
+                <p>
+
+                    Repuestos para motos de todas las marcas.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h4>
+
+                    Navegación
+
+                </h4>
+
+                <a href="#inicio">Inicio</a>
+
+                <a href="#catalogo">Catálogo</a>
+
+                <a href="#marcas">Marcas</a>
+
+                <a href="#contacto">Contacto</a>
+
+            </div>
+
+            <div>
+
+                <h4>
+
+                    Seguinos
+
+                </h4>
+
+                <div class="redes">
+
+                    <a href="#">
+
+                        <i class="fab fa-facebook"></i>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fab fa-instagram"></i>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fab fa-tiktok"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+
+            © 2026 ARUANI Repuestos
+
+            | Todos los derechos reservados.
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- ========================================= -->
+<!-- BOTÓN FLOTANTE -->
+<!-- ========================================= -->
+
+<a
+
+href="https://wa.me/5492610000000"
+
+target="_blank"
+
+class="whatsapp-float">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+<!-- ========================================= -->
+<!-- SCRIPTS -->
+<!-- ========================================= -->
+
+<script src="js/productos.js"></script>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>

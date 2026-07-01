@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nombre": "Pastillas de Freno Delanteras",
+    "marca": "Honda",
+    "categoria": "Frenos",
+    "codigo": "HON-PFD-001",
+    "descripcion": "Pastillas de freno delanteras para Honda Wave 110.",
+    "imagen": "imagenes/productos/honda/pastillas-wave.webp",
+    "destacado": true
+  },
+  {
+    "id": 2,
+    "nombre": "Filtro de Aceite",
+    "marca": "Yamaha",
+    "categoria": "Motor",
+    "codigo": "YAM-FA-002",
+    "descripcion": "Filtro de aceite original Yamaha.",
+    "imagen": "imagenes/productos/yamaha/filtro.webp",
+    "destacado": true
+  },
+  {
+    "id": 3,
+    "nombre": "Kit Transmisión",
+    "marca": "Bajaj",
+    "categoria": "Transmisión",
+    "codigo": "BAJ-KT-003",
+    "descripcion": "Kit transmisión completo.",
+    "imagen": "imagenes/productos/bajaj/kit.webp",
+    "destacado": false
+  }
+]

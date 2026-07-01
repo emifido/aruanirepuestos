@@ -1,11 +1,12 @@
 /*=========================================================
- ARUANI STORE V5
- APP.JS
- PARTE 1
-=========================================================*/
+    ARUANI STORE V6
+    APP.JS
+==========================================================*/
+
+"use strict";
 
 /*=========================================================
- CONFIGURACIÓN
+CONFIGURACIÓN
 =========================================================*/
 
 const CONFIG = {
@@ -14,193 +15,208 @@ const CONFIG = {
 
     imagenPorDefecto: "imagenes/productos/sin-foto.webp",
 
-    whatsapp: "5492610000000"
+    whatsapp: "5492610000000",
+
+    velocidadSlider: 4000,
+
+    animacionTarjetas: 60
 
 };
 
 /*=========================================================
- VARIABLES GLOBALES
+ESTADO DE LA APLICACIÓN
 =========================================================*/
 
-let productos = [];
+const APP = {
 
-let productosFiltrados = [];
+    productos: [],
 
-let marcaSeleccionada = "Todas";
+    productosFiltrados: [],
 
-let categoriaSeleccionada = "Todas";
+    productoActual: null,
+
+    filtros:{
+
+        texto:"",
+
+        marca:"Todas",
+
+        categoria:"Todas",
+
+        ordenar:"nombre"
+
+    }
+
+};
 
 /*=========================================================
- ELEMENTOS DEL DOM
+ELEMENTOS DEL DOM
 =========================================================*/
 
-const contenedorProductos = document.getElementById("productos");
+const DOM = {
 
-const buscador = document.getElementById("buscar");
+    productos: document.getElementById("productos"),
 
-const contador = document.getElementById("contador");
+    destacados: document.getElementById("sliderDestacados"),
 
-const sliderDestacados = document.getElementById("sliderDestacados");
+    buscador: document.getElementById("buscar"),
+
+    contador: document.getElementById("contador"),
+
+    ordenar: document.getElementById("ordenar"),
+
+    modal: document.getElementById("lightbox"),
+
+    modalContenido: document.getElementById("lightboxContenido"),
+
+    btnTop: document.getElementById("btnTop"),
+
+    loader: document.getElementById("loader"),
+
+    btnMenu: document.getElementById("btnMenu"),
+
+    menu: document.getElementById("menu"),
+
+    overlayMenu: document.getElementById("overlayMenu")
+
+};
 
 /*=========================================================
- CARGAR PRODUCTOS
+UTILIDADES
 =========================================================*/
 
-async function cargarProductos(){
+const Utils={
 
-    try{
+    formatearTexto(texto){
 
-        const respuesta = await fetch(CONFIG.archivoProductos);
+        if(!texto) return "";
 
-        if(!respuesta.ok){
+        return texto.toString().toLowerCase().trim();
 
-            throw new Error("No se pudo cargar productos.json");
+    },
+
+    mostrarLoader(){
+
+        if(DOM.loader){
+
+            DOM.loader.style.display="flex";
 
         }
 
-        productos = await respuesta.json();
+    },
 
-        productosFiltrados = [...productos];
+    ocultarLoader(){
 
-        mostrarProductos(productosFiltrados);
+        if(DOM.loader){
+
+            DOM.loader.style.display="none";
+
+        }
+
+    },
+
+    mostrarToast(texto){
+
+        const toast=document.getElementById("toast");
+
+        const span=document.getElementById("toastTexto");
+
+        if(!toast || !span) return;
+
+        span.textContent=texto;
+
+        toast.classList.add("mostrar");
+
+        setTimeout(()=>{
+
+            toast.classList.remove("mostrar");
+
+        },2500);
+
+    }
+
+};
+
+/*=========================================================
+INICIO
+=========================================================*/
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    console.clear();
+
+    console.log("%cARUANI STORE V6",
+
+        "color:#f39c12;font-size:18px;font-weight:bold;");
+
+    console.log("Inicializando sistema...");
+
+});
+/*=========================================================
+CARGAR PRODUCTOS
+=========================================================*/
+
+async function cargarProductos() {
+
+    Utils.mostrarLoader();
+
+    try {
+
+        const respuesta = await fetch(CONFIG.archivoProductos);
+
+        if (!respuesta.ok) {
+
+            throw new Error("No se pudo leer productos.json");
+
+        }
+
+        APP.productos = await respuesta.json();
+
+        APP.productosFiltrados = [...APP.productos];
+
+        console.log("Productos cargados:", APP.productos.length);
+
+        renderCatalogo();
+
+        renderDestacados();
 
         actualizarContador();
 
-        mostrarDestacados();
-
-        console.log("Productos cargados:", productos.length);
-
-    }
-
-    catch(error){
+    } catch (error) {
 
         console.error(error);
 
-        contenedorProductos.innerHTML=`
+        mostrarErrorCatalogo();
 
-        <div class="sin-resultados">
+    } finally {
 
-            <h2>Error al cargar el catálogo</h2>
-
-            <p>Verifica el archivo productos.json</p>
-
-        </div>
-
-        `;
+        Utils.ocultarLoader();
 
     }
 
 }
 
 /*=========================================================
- CREAR TARJETA
+RENDER CATÁLOGO
 =========================================================*/
 
-function crearTarjeta(producto){
+function renderCatalogo() {
 
-    const imagen = producto.imagenes?.length
+    if (!DOM.productos) return;
 
-        ? producto.imagenes[0]
+    if (APP.productosFiltrados.length === 0) {
 
-        : CONFIG.imagenPorDefecto;
+        DOM.productos.innerHTML = `
 
-    return `
+            <div class="sin-resultados">
 
-<div class="producto fade-up">
+                <i class="fas fa-box-open"></i>
 
-    ${producto.destacado ? '<div class="badge">DESTACADO</div>' : ""}
+                <h2>No encontramos productos</h2>
 
-    <div class="producto-imagen">
-
-        <img
-
-            src="${imagen}"
-
-            alt="${producto.nombre}"
-
-            loading="lazy"
-
-            onerror="this.src='${CONFIG.imagenPorDefecto}'"
-
-        >
-
-    </div>
-
-    <div class="producto-info">
-
-        <span>
-
-            ${producto.marca}
-
-        </span>
-
-        <h3>
-
-            ${producto.nombre}
-
-        </h3>
-
-        <p>
-
-            ${producto.descripcion}
-
-        </p>
-
-        <div class="producto-datos">
-
-            <div>
-
-                <strong>Código</strong>
-
-                <span>${producto.codigo}</span>
+                <p>Prueba otra búsqueda.</p>
 
             </div>
-
-            <div>
-
-                <strong>Categoría</strong>
-
-                <span>${producto.categoria}</span>
-
-            </div>
-
-        </div>
-
-        <button
-
-            class="btn-producto"
-
-            data-id="${producto.id}">
-
-            Ver Producto
-
-        </button>
-
-    </div>
-
-</div>
-
-`;
-
-}
-
-/*=========================================================
- MOSTRAR PRODUCTOS
-=========================================================*/
-
-function mostrarProductos(lista){
-
-    if(lista.length===0){
-
-        contenedorProductos.innerHTML=`
-
-        <div class="sin-resultados">
-
-            <h2>No encontramos productos.</h2>
-
-            <p>Prueba otra búsqueda.</p>
-
-        </div>
 
         `;
 
@@ -208,31 +224,53 @@ function mostrarProductos(lista){
 
     }
 
-    contenedorProductos.innerHTML=
+    DOM.productos.innerHTML = APP.productosFiltrados
 
-        lista.map(crearTarjeta).join("");
+        .map(crearTarjetaProducto)
+
+        .join("");
 
 }
 
 /*=========================================================
- CONTADOR
+RENDER DESTACADOS
 =========================================================*/
 
-function actualizarContador(){
+function renderDestacados() {
 
-    contador.innerHTML=`
+    if (!DOM.destacados) return;
+
+    const destacados = APP.productos.filter(
+
+        producto => producto.destacado
+
+    );
+
+    DOM.destacados.innerHTML = destacados
+
+        .map(crearTarjetaProducto)
+
+        .join("");
+
+}
+
+/*=========================================================
+CONTADOR
+=========================================================*/
+
+function actualizarContador() {
+
+    if (!DOM.contador) return;
+
+    DOM.contador.innerHTML = `
 
         Mostrando
 
-        <strong>
-
-            ${productosFiltrados.length}
-
-        </strong>
+        <strong>${APP.productosFiltrados.length}</strong>
 
         de
 
-        ${productos.length}
+        ${APP.productos.length}
 
         productos
 
@@ -241,167 +279,261 @@ function actualizarContador(){
 }
 
 /*=========================================================
- PRODUCTOS DESTACADOS
+ERROR CATÁLOGO
 =========================================================*/
 
-function mostrarDestacados(){
+function mostrarErrorCatalogo() {
 
-    if(!sliderDestacados) return;
+    if (!DOM.productos) return;
 
-    const destacados=
+    DOM.productos.innerHTML = `
 
-        productos.filter(p=>p.destacado);
+        <div class="sin-resultados">
 
-    sliderDestacados.innerHTML=
+            <i class="fas fa-circle-exclamation"></i>
 
-        destacados.map(crearTarjeta).join("");
+            <h2>Error al cargar productos</h2>
+
+            <p>
+
+                Verifica el archivo
+
+                <strong>productos.json</strong>
+
+            </p>
+
+        </div>
+
+    `;
+
+}
+/*=========================================================
+CREAR TARJETA DE PRODUCTO
+=========================================================*/
+
+function crearTarjetaProducto(producto){
+
+    const imagen = producto.imagen && producto.imagen !== ""
+        ? producto.imagen
+        : CONFIG.imagenPorDefecto;
+
+    const destacado = producto.destacado
+        ? `<span class="badge-destacado">
+                <i class="fas fa-star"></i>
+                Destacado
+           </span>`
+        : "";
+
+    return `
+
+    <article class="producto fade-in">
+
+        ${destacado}
+
+        <div class="producto-imagen">
+
+            <img
+                src="${imagen}"
+                alt="${producto.nombre}"
+                loading="lazy"
+                onerror="this.src='${CONFIG.imagenPorDefecto}'">
+
+        </div>
+
+        <div class="producto-info">
+
+            <span class="producto-marca">
+
+                ${producto.marca}
+
+            </span>
+
+            <h3>
+
+                ${producto.nombre}
+
+            </h3>
+
+            <p class="producto-codigo">
+
+                Código: ${producto.codigo}
+
+            </p>
+
+            <p class="producto-categoria">
+
+                ${producto.categoria}
+
+            </p>
+
+            <div class="producto-botones">
+
+                <button
+                    class="btn-ver"
+                    onclick="abrirProducto(${producto.id})">
+
+                    <i class="fas fa-eye"></i>
+
+                    Ver Detalle
+
+                </button>
+
+                <button
+                    class="btn-whatsapp"
+                    onclick="consultarWhatsApp(${producto.id})">
+
+                    <i class="fab fa-whatsapp"></i>
+
+                    Consultar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </article>
+
+    `;
 
 }
 
 /*=========================================================
- INICIO
+BUSCAR PRODUCTO POR ID
 =========================================================*/
 
-document.addEventListener("DOMContentLoaded",()=>{
+function obtenerProducto(id){
 
-    cargarProductos();
+    return APP.productos.find(producto=>producto.id==id);
 
-});
+}
+
 /*=========================================================
- BUSCADOR
+PRODUCTOS DESTACADOS
+=========================================================*/
+
+function obtenerDestacados(){
+
+    return APP.productos.filter(producto=>producto.destacado);
+
+}
+
+/*=========================================================
+TOTAL PRODUCTOS
+=========================================================*/
+
+function totalProductos(){
+
+    return APP.productos.length;
+
+}
+/*=========================================================
+BUSCADOR
 =========================================================*/
 
 function buscarProductos(texto){
 
-    texto = texto.toLowerCase().trim();
-
-    productosFiltrados = productos.filter(producto=>{
-
-        return (
-
-            producto.nombre.toLowerCase().includes(texto)
-
-            ||
-
-            producto.codigo.toLowerCase().includes(texto)
-
-            ||
-
-            producto.marca.toLowerCase().includes(texto)
-
-            ||
-
-            producto.categoria.toLowerCase().includes(texto)
-
-            ||
-
-            producto.subcategoria.toLowerCase().includes(texto)
-
-            ||
-
-            producto.descripcion.toLowerCase().includes(texto)
-
-            ||
-
-            producto.modelos.join(" ").toLowerCase().includes(texto)
-
-            ||
-
-            producto.etiquetas.join(" ").toLowerCase().includes(texto)
-
-        );
-
-    });
+    APP.filtros.texto = Utils.formatearTexto(texto);
 
     aplicarFiltros();
 
 }
 
 /*=========================================================
- FILTROS
+APLICAR TODOS LOS FILTROS
 =========================================================*/
 
 function aplicarFiltros(){
 
-    let lista=[...productosFiltrados];
+    APP.productosFiltrados = APP.productos.filter(producto=>{
 
-    if(marcaSeleccionada!=="Todas"){
+        const coincideTexto =
 
-        lista=lista.filter(producto=>
+            APP.filtros.texto === "" ||
 
-            producto.marca===marcaSeleccionada
+            Utils.formatearTexto(producto.nombre).includes(APP.filtros.texto) ||
 
-        );
+            Utils.formatearTexto(producto.codigo).includes(APP.filtros.texto) ||
 
-    }
+            Utils.formatearTexto(producto.marca).includes(APP.filtros.texto);
 
-    if(categoriaSeleccionada!=="Todas"){
+        const coincideMarca =
 
-        lista=lista.filter(producto=>
+            APP.filtros.marca === "Todas" ||
 
-            producto.categoria===categoriaSeleccionada
+            producto.marca === APP.filtros.marca;
 
-        );
+        const coincideCategoria =
 
-    }
+            APP.filtros.categoria === "Todas" ||
 
-    mostrarProductos(lista);
+            producto.categoria === APP.filtros.categoria;
 
-    contador.innerHTML=`
+        return coincideTexto && coincideMarca && coincideCategoria;
 
-        Mostrando
+    });
 
-        <strong>${lista.length}</strong>
-
-        de
-
-        ${productos.length}
-
-        productos
-
-    `;
+    ordenarProductos(APP.filtros.ordenar);
 
 }
 
 /*=========================================================
- FILTRAR POR MARCA
+ORDENAR PRODUCTOS
 =========================================================*/
 
-document.querySelectorAll(".marca-card").forEach(card=>{
+function ordenarProductos(tipo){
 
-    card.addEventListener("click",()=>{
+    APP.filtros.ordenar = tipo;
 
-        marcaSeleccionada=card.dataset.marca;
+    switch(tipo){
 
-        aplicarFiltros();
+        case "nombre":
 
-    });
+            APP.productosFiltrados.sort((a,b)=>
 
-});
+                a.nombre.localeCompare(b.nombre));
+
+            break;
+
+        case "marca":
+
+            APP.productosFiltrados.sort((a,b)=>
+
+                a.marca.localeCompare(b.marca));
+
+            break;
+
+        case "codigo":
+
+            APP.productosFiltrados.sort((a,b)=>
+
+                a.codigo.localeCompare(b.codigo));
+
+            break;
+
+        case "destacados":
+
+            APP.productosFiltrados =
+
+                APP.productosFiltrados.filter(p=>p.destacado);
+
+            break;
+
+    }
+
+    renderCatalogo();
+
+    actualizarContador();
+
+}
 
 /*=========================================================
- FILTRAR POR CATEGORÍA
+EVENTOS DEL BUSCADOR
 =========================================================*/
 
-document.querySelectorAll(".filtros li").forEach(item=>{
+if(DOM.buscador){
 
-    item.addEventListener("click",()=>{
-
-        categoriaSeleccionada=item.textContent.trim();
-
-        aplicarFiltros();
-
-    });
-
-});
-
-/*=========================================================
- BUSCADOR EN TIEMPO REAL
-=========================================================*/
-
-if(buscador){
-
-    buscador.addEventListener("keyup",(e)=>{
+    DOM.buscador.addEventListener("input",(e)=>{
 
         buscarProductos(e.target.value);
 
@@ -410,171 +542,162 @@ if(buscador){
 }
 
 /*=========================================================
- ORDENAR
+EVENTOS CATEGORÍAS
 =========================================================*/
 
-function ordenarProductos(tipo){
+document.querySelectorAll(".filtros li").forEach(item=>{
 
-    switch(tipo){
+    item.addEventListener("click",()=>{
 
-        case "nombre":
+        document.querySelectorAll(".filtros li")
 
-            productosFiltrados.sort((a,b)=>
+            .forEach(li=>li.classList.remove("activo"));
 
-                a.nombre.localeCompare(b.nombre)
+        item.classList.add("activo");
 
-            );
+        APP.filtros.categoria = item.dataset.categoria;
 
-        break;
+        aplicarFiltros();
 
-        case "marca":
+    });
 
-            productosFiltrados.sort((a,b)=>
-
-                a.marca.localeCompare(b.marca)
-
-            );
-
-        break;
-
-        case "codigo":
-
-            productosFiltrados.sort((a,b)=>
-
-                a.codigo.localeCompare(b.codigo)
-
-            );
-
-        break;
-
-        case "destacados":
-
-            productosFiltrados.sort((a,b)=>
-
-                b.destacado-a.destacado
-
-            );
-
-        break;
-
-    }
-
-    aplicarFiltros();
-
-}
+});
 
 /*=========================================================
- RESTABLECER FILTROS
+EVENTOS MARCAS
 =========================================================*/
 
-function limpiarFiltros(){
+document.querySelectorAll(".marca-card").forEach(card=>{
 
-    marcaSeleccionada="Todas";
+    card.addEventListener("click",()=>{
 
-    categoriaSeleccionada="Todas";
+        APP.filtros.marca = card.dataset.marca;
 
-    productosFiltrados=[...productos];
+        aplicarFiltros();
 
-    mostrarProductos(productos);
+    });
 
-    actualizarContador();
+});
 
-    if(buscador){
+/*=========================================================
+SELECT ORDENAR
+=========================================================*/
 
-        buscador.value="";
+if(DOM.ordenar){
 
-    }
+    DOM.ordenar.addEventListener("change",(e)=>{
+
+        ordenarProductos(e.target.value);
+
+    });
 
 }
-
-console.log("✔ Módulo de búsqueda y filtros cargado.");
 /*=========================================================
- MODAL DEL PRODUCTO
+MODAL PRODUCTO
 =========================================================*/
-
-let productoSeleccionado = null;
 
 function abrirProducto(id){
 
-    productoSeleccionado = productos.find(p => p.id == id);
+    const producto = obtenerProducto(id);
 
-    if(!productoSeleccionado) return;
+    if(!producto) return;
 
-    const modal = document.getElementById("lightbox");
+    APP.productoActual = producto;
 
-    const contenido = document.getElementById("lightboxContenido");
-
-    if(!modal || !contenido) return;
-
-    const imagenPrincipal = productoSeleccionado.imagenes?.length
-        ? productoSeleccionado.imagenes[0]
+    const imagen = producto.imagen && producto.imagen !== ""
+        ? producto.imagen
         : CONFIG.imagenPorDefecto;
 
-    contenido.innerHTML = `
+    DOM.modalContenido.innerHTML = `
 
-        <img
-            src="${imagenPrincipal}"
-            alt="${productoSeleccionado.nombre}"
-            onerror="this.src='${CONFIG.imagenPorDefecto}'"
-        >
+        <div class="modal-grid">
 
-        <h2>${productoSeleccionado.nombre}</h2>
+            <div class="modal-imagen">
 
-        <p>${productoSeleccionado.descripcion}</p>
+                <img
+                    src="${imagen}"
+                    alt="${producto.nombre}"
+                    onerror="this.src='${CONFIG.imagenPorDefecto}'">
 
-        <hr>
+            </div>
 
-        <p><strong>Código:</strong> ${productoSeleccionado.codigo}</p>
+            <div class="modal-info">
 
-        <p><strong>Marca:</strong> ${productoSeleccionado.marca}</p>
+                <span class="modal-marca">
 
-        <p><strong>Categoría:</strong> ${productoSeleccionado.categoria}</p>
+                    ${producto.marca}
 
-        <p><strong>Modelos:</strong> ${productoSeleccionado.modelos.join(", ")}</p>
+                </span>
 
-        <div style="margin-top:30px">
+                <h2>
 
-            <button
-                class="btn"
-                onclick="consultarWhatsapp()">
+                    ${producto.nombre}
 
-                Consultar por WhatsApp
+                </h2>
 
-            </button>
+                <p>
+
+                    <strong>Código:</strong>
+
+                    ${producto.codigo}
+
+                </p>
+
+                <p>
+
+                    <strong>Categoría:</strong>
+
+                    ${producto.categoria}
+
+                </p>
+
+                <p>
+
+                    ${producto.descripcion || "Sin descripción disponible."}
+
+                </p>
+
+                <div class="modal-botones">
+
+                    <button
+                        class="btn-whatsapp"
+                        onclick="consultarWhatsApp(${producto.id})">
+
+                        <i class="fab fa-whatsapp"></i>
+
+                        Consultar este producto
+
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 
     `;
 
-    modal.classList.add("active");
+    DOM.modal.classList.add("mostrar");
+
+    document.body.style.overflow="hidden";
 
 }
 
 /*=========================================================
- CERRAR MODAL
+CERRAR MODAL
 =========================================================*/
 
 function cerrarProducto(){
 
-    const modal=document.getElementById("lightbox");
+    DOM.modal.classList.remove("mostrar");
 
-    if(modal){
-
-        modal.classList.remove("active");
-
-    }
+    document.body.style.overflow="auto";
 
 }
 
-document.addEventListener("click",(e)=>{
-
-    if(e.target.classList.contains("lightbox")){
-
-        cerrarProducto();
-
-    }
-
-});
+/*=========================================================
+CERRAR CON ESC
+=========================================================*/
 
 document.addEventListener("keydown",(e)=>{
 
@@ -587,101 +710,307 @@ document.addEventListener("keydown",(e)=>{
 });
 
 /*=========================================================
- BOTONES VER PRODUCTO
+CLICK FUERA DEL MODAL
 =========================================================*/
 
-document.addEventListener("click",(e)=>{
+if(DOM.modal){
 
-    if(e.target.classList.contains("btn-producto")){
+    DOM.modal.addEventListener("click",(e)=>{
 
-        abrirProducto(
+        if(e.target===DOM.modal){
 
-            e.target.dataset.id
+            cerrarProducto();
 
-        );
+        }
+
+    });
+
+}
+/*=========================================================
+WHATSAPP
+=========================================================*/
+
+function consultarWhatsApp(id){
+
+    const producto = obtenerProducto(id);
+
+    if(!producto) return;
+
+    const mensaje = encodeURIComponent(
+
+`Hola, vi este producto en su catálogo web.
+
+*Producto:* ${producto.nombre}
+
+*Código:* ${producto.codigo}
+
+*Marca:* ${producto.marca}
+
+¿Está disponible?`
+
+    );
+
+    window.open(
+
+        `https://wa.me/${CONFIG.whatsapp}?text=${mensaje}`,
+
+        "_blank"
+
+    );
+
+}
+
+/*=========================================================
+SLIDER DESTACADOS
+=========================================================*/
+
+let indiceSlider = 0;
+
+function iniciarSlider(){
+
+    if(!DOM.destacados) return;
+
+    const tarjetas = DOM.destacados.querySelectorAll(".producto");
+
+    if(tarjetas.length <= 1) return;
+
+    setInterval(()=>{
+
+        indiceSlider++;
+
+        if(indiceSlider >= tarjetas.length){
+
+            indiceSlider = 0;
+
+        }
+
+        DOM.destacados.scrollTo({
+
+            left: tarjetas[indiceSlider].offsetLeft,
+
+            behavior:"smooth"
+
+        });
+
+    },CONFIG.velocidadSlider);
+
+}
+
+/*=========================================================
+BOTÓN VOLVER ARRIBA
+=========================================================*/
+
+window.addEventListener("scroll",()=>{
+
+    if(!DOM.btnTop) return;
+
+    if(window.scrollY > 400){
+
+        DOM.btnTop.classList.add("mostrar");
+
+    }else{
+
+        DOM.btnTop.classList.remove("mostrar");
 
     }
 
 });
 
-/*=========================================================
- WHATSAPP
-=========================================================*/
+if(DOM.btnTop){
 
-function consultarWhatsapp(){
+    DOM.btnTop.addEventListener("click",()=>{
 
-    if(!productoSeleccionado) return;
+        window.scrollTo({
 
-    const mensaje=
+            top:0,
 
-`Hola, estoy interesado en el siguiente repuesto:
+            behavior:"smooth"
 
-*${productoSeleccionado.nombre}*
-
-Código: ${productoSeleccionado.codigo}
-
-Marca: ${productoSeleccionado.marca}
-
-¿Podrían brindarme más información?`;
-
-    const url=
-
-`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(mensaje)}`;
-
-    window.open(url,"_blank");
-
-}
-
-/*=========================================================
- ANIMACIÓN TARJETAS
-=========================================================*/
-
-function animarTarjetas(){
-
-    const tarjetas=document.querySelectorAll(".producto");
-
-    tarjetas.forEach((tarjeta,index)=>{
-
-        tarjeta.style.opacity="0";
-
-        tarjeta.style.transform="translateY(25px)";
-
-        setTimeout(()=>{
-
-            tarjeta.style.transition=".45s";
-
-            tarjeta.style.opacity="1";
-
-            tarjeta.style.transform="translateY(0px)";
-
-        },index*60);
+        });
 
     });
 
 }
 
 /*=========================================================
- OBSERVER
+MENÚ MÓVIL
 =========================================================*/
 
-const observer=new MutationObserver(()=>{
+if(DOM.btnMenu && DOM.menu){
 
-    animarTarjetas();
+    DOM.btnMenu.addEventListener("click",()=>{
+
+        DOM.menu.classList.toggle("activo");
+
+        if(DOM.overlayMenu){
+
+            DOM.overlayMenu.classList.toggle("activo");
+
+        }
+
+    });
+
+}
+
+if(DOM.overlayMenu){
+
+    DOM.overlayMenu.addEventListener("click",()=>{
+
+        DOM.menu.classList.remove("activo");
+
+        DOM.overlayMenu.classList.remove("activo");
+
+    });
+
+}
+
+/*=========================================================
+ANIMACIÓN TARJETAS
+=========================================================*/
+
+const observer = new IntersectionObserver((entradas)=>{
+
+    entradas.forEach((entrada)=>{
+
+        if(entrada.isIntersecting){
+
+            entrada.target.classList.add("visible");
+
+        }
+
+    });
+
+},{
+    threshold:0.15
+});
+
+function activarAnimaciones(){
+
+    document.querySelectorAll(".producto").forEach(card=>{
+
+        observer.observe(card);
+
+    });
+
+}
+/*=========================================================
+INICIALIZACIÓN GENERAL
+=========================================================*/
+
+async function iniciarAplicacion(){
+
+    console.log("====================================");
+
+    console.log("ARUANI STORE V6");
+
+    console.log("Inicializando aplicación...");
+
+    console.log("====================================");
+
+    await cargarProductos();
+
+    activarAnimaciones();
+
+    iniciarSlider();
+
+    validarImagenes();
+
+    mostrarEstadisticas();
+
+    console.log("Sistema listo.");
+
+}
+
+/*=========================================================
+RECARGAR CATÁLOGO
+=========================================================*/
+
+function actualizarCatalogo(){
+
+    renderCatalogo();
+
+    renderDestacados();
+
+    actualizarContador();
+
+    activarAnimaciones();
+
+}
+
+/*=========================================================
+OBSERVADOR DE CAMBIOS
+=========================================================*/
+
+const catalogoObserver = new MutationObserver(()=>{
+
+    activarAnimaciones();
+
+    validarImagenes();
 
 });
 
-observer.observe(
+if(DOM.productos){
 
-    document.body,
+    catalogoObserver.observe(
 
-    {
+        DOM.productos,
 
-        childList:true,
+        {
 
-        subtree:true
+            childList:true,
+
+            subtree:true
+
+        }
+
+    );
+
+}
+
+/*=========================================================
+EVENTOS GENERALES
+=========================================================*/
+
+window.addEventListener("load",()=>{
+
+    iniciarAplicacion();
+
+});
+
+/*=========================================================
+REDIMENSIONAR
+=========================================================*/
+
+window.addEventListener("resize",()=>{
+
+    activarAnimaciones();
+
+});
+
+/*=========================================================
+VISIBILIDAD DE LA PÁGINA
+=========================================================*/
+
+document.addEventListener("visibilitychange",()=>{
+
+    if(document.visibilityState==="visible"){
+
+        actualizarCatalogo();
 
     }
 
-);
+});
 
-console.log("✔ Modal y WhatsApp cargados.");
+/*=========================================================
+INFORMACIÓN
+=========================================================*/
+
+console.log("%cARUANI STORE V6",
+
+"color:#ff9800;font-size:18px;font-weight:bold;");
+
+console.log("Desarrollado para ARUANI REPUESTOS");
+
+console.log("Motor de catálogo iniciado correctamente.");
+
+console.log("Versión: 6.0");

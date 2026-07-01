@@ -5,51 +5,69 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>ARUANI Repuestos | Catálogo Online</title>
+    <title>ARUANI REPUESTOS | Repuestos para Motos</title>
 
     <meta name="description"
-        content="Catálogo online de repuestos para motos. Honda, Yamaha, Bajaj, Motomel, Corven, Gilera y muchas más.">
+          content="Catálogo online de repuestos para motos. Honda, Yamaha, Bajaj, Motomel, Corven, Gilera, Benelli y más.">
 
-    <link rel="icon" href="imagenes/logo.png">
+    <meta name="keywords"
+          content="repuestos motos, honda, yamaha, bajaj, motomel, corven, repuestera">
+
+    <meta name="author"
+          content="Aruani Repuestos">
+
+    <link rel="icon"
+          href="imagenes/favicon.png">
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+          rel="stylesheet">
 
     <!-- Font Awesome -->
+
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/estilos.css">
+
+    <link rel="stylesheet"
+          href="css/estilos.css">
 
 </head>
 
 <body>
 
-<!-- ===========================
+<!--=========================================
 HEADER
-============================ -->
+==========================================-->
 
 <header class="header">
 
     <div class="contenedor navbar">
 
-        <a href="#" class="logo">
+        <a href="#inicio" class="logo">
 
-            <img src="imagenes/logo.png" alt="ARUANI">
+            <img src="imagenes/logo.png"
+                 alt="Aruani Repuestos">
 
         </a>
 
-        <nav class="menu">
+        <nav id="menu" class="menu">
 
             <a href="#inicio">Inicio</a>
+
+            <a href="#destacados">Destacados</a>
 
             <a href="#catalogo">Catálogo</a>
 
@@ -61,93 +79,59 @@ HEADER
 
         </nav>
 
-        <div class="acciones">
+        <button id="btnMenu" class="menu-mobile">
 
-            <button class="btn-icono">
+            <i class="fas fa-bars"></i>
 
-                <i class="fas fa-search"></i>
-
-            </button>
-
-            <a href="https://wa.me/5492610000000"
-
-                class="btnWhatsapp"
-
-                target="_blank">
-
-                <i class="fab fa-whatsapp"></i>
-
-                WhatsApp
-
-            </a>
-
-        </div>
+        </button>
 
     </div>
 
 </header>
 
-<!-- ===========================
+<!--=========================================
 HERO
-============================ -->
+==========================================-->
 
 <section class="hero" id="inicio">
-
-    <div class="hero-overlay"></div>
 
     <div class="contenedor hero-grid">
 
         <div class="hero-texto">
 
-            <span class="hero-tag">
+            <span class="subtitulo">
 
-                CATÁLOGO ONLINE
+                Repuestos para motocicletas
 
             </span>
 
             <h1>
 
-                Repuestos para motos
-
-                <span>
-
-                    originales y alternativos
-
-                </span>
+                Encontrá el repuesto que tu moto necesita.
 
             </h1>
 
             <p>
 
-                Bienvenido a <strong>ARUANI REPUESTOS</strong>.
-
-                Encuentra rápidamente el repuesto que necesitas para tu moto.
-
-                Trabajamos con las principales marcas del mercado.
+                Catálogo online de repuestos para Honda, Yamaha,
+                Bajaj, Motomel, Corven, Gilera, Benelli,
+                Kawasaki, KTM, Suzuki y muchas marcas más.
 
             </p>
 
             <div class="hero-botones">
 
                 <a href="#catalogo"
-
-                    class="btn amarillo">
-
-                    <i class="fas fa-motorcycle"></i>
+                   class="btn">
 
                     Ver Catálogo
 
                 </a>
 
-                <a href="https://wa.me/5492610000000"
+                <a href="#contacto"
+                   class="btn btn-secundario">
 
-                    target="_blank"
-
-                    class="btn negro">
-
-                    <i class="fab fa-whatsapp"></i>
-
-                    Consultar
+                    Contactar
 
                 </a>
 
@@ -157,161 +141,38 @@ HERO
 
         <div class="hero-imagen">
 
-            <img
-
-                src="imagenes/hero.png"
-
-                alt="Moto deportiva">
+            <img src="imagenes/hero.png"
+                 alt="Moto">
 
         </div>
 
     </div>
 
 </section>
-
-<!-- ===========================
-ESTADÍSTICAS
-============================ -->
-
-<section class="estadisticas-top">
-
-    <div class="contenedor estadisticas-grid">
-
-        <div class="estadistica">
-
-            <i class="fas fa-box-open"></i>
-
-            <h2>5000+</h2>
-
-            <span>Repuestos</span>
-
-        </div>
-
-        <div class="estadistica">
-
-            <i class="fas fa-motorcycle"></i>
-
-            <h2>50+</h2>
-
-            <span>Marcas</span>
-
-        </div>
-
-        <div class="estadistica">
-
-            <i class="fas fa-headset"></i>
-
-            <h2>100%</h2>
-
-            <span>Asesoramiento</span>
-
-        </div>
-
-        <div class="estadistica">
-
-            <i class="fab fa-whatsapp"></i>
-
-            <h2>24/7</h2>
-
-            <span>WhatsApp</span>
-
-        </div>
-
-    </div>
-
-</section>
-<!-- ==================================================
+<!--=========================================
 BUSCADOR
-=================================================== -->
+==========================================-->
 
-<section class="busqueda">
-
-    <div class="contenedor">
-
-        <div class="buscador">
-
-            <i class="fas fa-search"></i>
-
-            <input
-                type="text"
-                id="buscar"
-                placeholder="Buscar por nombre, código, categoría o marca...">
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ==================================================
-MARCAS
-=================================================== -->
-
-<section id="marcas" class="marcas">
+<section class="buscador-section">
 
     <div class="contenedor">
 
-        <div class="titulo-seccion">
+        <div class="buscador-box">
 
-            <span>TRABAJAMOS CON LAS MEJORES MARCAS</span>
+            <div class="input-busqueda">
 
-            <h2>Buscar por Marca</h2>
+                <i class="fas fa-search"></i>
 
-            <p>
-
-                Haz clic sobre una marca para visualizar sus productos.
-
-            </p>
-
-        </div>
-
-        <div class="marcas-grid">
-
-            <div class="marca-card" data-marca="Honda">
-
-                <img src="imagenes/marcas/honda.png" alt="Honda">
+                <input
+                    type="text"
+                    id="buscar"
+                    placeholder="Buscar por nombre, código, marca o modelo...">
 
             </div>
 
-            <div class="marca-card" data-marca="Yamaha">
+            <div id="contador" class="contador">
 
-                <img src="imagenes/marcas/yamaha.png" alt="Yamaha">
-
-            </div>
-
-            <div class="marca-card" data-marca="Bajaj">
-
-                <img src="imagenes/marcas/bajaj.png" alt="Bajaj">
-
-            </div>
-
-            <div class="marca-card" data-marca="Suzuki">
-
-                <img src="imagenes/marcas/suzuki.png" alt="Suzuki">
-
-            </div>
-
-            <div class="marca-card" data-marca="Motomel">
-
-                <img src="imagenes/marcas/motomel.png" alt="Motomel">
-
-            </div>
-
-            <div class="marca-card" data-marca="Corven">
-
-                <img src="imagenes/marcas/corven.png" alt="Corven">
-
-            </div>
-
-            <div class="marca-card" data-marca="Gilera">
-
-                <img src="imagenes/marcas/gilera.png" alt="Gilera">
-
-            </div>
-
-            <div class="marca-card" data-marca="Benelli">
-
-                <img src="imagenes/marcas/benelli.png" alt="Benelli">
+                Mostrando 0 productos
 
             </div>
 
@@ -321,9 +182,9 @@ MARCAS
 
 </section>
 
-<!-- ==================================================
-DESTACADOS
-=================================================== -->
+<!--=========================================
+PRODUCTOS DESTACADOS
+==========================================-->
 
 <section id="destacados" class="destacados">
 
@@ -331,15 +192,29 @@ DESTACADOS
 
         <div class="titulo-seccion">
 
-            <span>RECOMENDADOS</span>
+            <span class="subtitulo">
 
-            <h2>Productos Destacados</h2>
+                Recomendados
+
+            </span>
+
+            <h2>
+
+                Productos Destacados
+
+            </h2>
+
+            <p>
+
+                Algunos de los repuestos más buscados por nuestros clientes.
+
+            </p>
 
         </div>
 
-        <div id="sliderDestacados">
-
-            <!-- app.js cargará automáticamente los productos destacados -->
+        <div
+            id="sliderDestacados"
+            class="productos-grid">
 
         </div>
 
@@ -347,102 +222,263 @@ DESTACADOS
 
 </section>
 
-<!-- ==================================================
+<!--=========================================
 CATÁLOGO
-=================================================== -->
+==========================================-->
 
-<section id="catalogo">
+<section
+    id="catalogo"
+    class="catalogo">
 
-    <div class="contenedor">
+<div class="contenedor">
 
-        <div class="catalogo-header">
+<div class="catalogo-layout">
 
-            <div>
+<!--=========================================
+FILTROS
+==========================================-->
 
-                <span class="subtitulo">
+<aside class="filtros">
 
-                    CATÁLOGO GENERAL
+<h3>
 
-                </span>
+<i class="fas fa-filter"></i>
 
-                <h2>
+Filtros
 
-                    Todos los Repuestos
+</h3>
 
-                </h2>
+<ul>
 
-            </div>
+<li data-categoria="Todas">
 
-            <div id="contador">
+Todas
 
-                0 Productos
+</li>
 
-            </div>
+<li data-categoria="Motor">
 
-        </div>
+Motor
 
-        <div class="catalogo-layout">
+</li>
 
-            <!-- ==================== -->
-            <!-- FILTROS -->
-            <!-- ==================== -->
+<li data-categoria="Frenos">
 
-            <aside class="filtros">
+Frenos
 
-                <h3>
+</li>
 
-                    Categorías
+<li data-categoria="Transmisión">
 
-                </h3>
+Transmisión
 
-                <ul>
+</li>
 
-                    <li>Motor</li>
+<li data-categoria="Suspensión">
 
-                    <li>Frenos</li>
+Suspensión
 
-                    <li>Transmisión</li>
+</li>
 
-                    <li>Lubricación</li>
+<li data-categoria="Electricidad">
 
-                    <li>Encendido</li>
+Electricidad
 
-                    <li>Filtros</li>
+</li>
 
-                    <li>Cubiertas</li>
+<li data-categoria="Lubricantes">
 
-                    <li>Accesorios</li>
+Lubricantes
 
-                    <li>Universal</li>
+</li>
 
-                </ul>
+<li data-categoria="Accesorios">
 
-            </aside>
+Accesorios
 
-            <!-- ==================== -->
-            <!-- PRODUCTOS -->
-            <!-- ==================== -->
+</li>
 
-            <div class="catalogo-contenido">
+</ul>
 
-                <div
-                    id="productos"
-                    class="productos-grid">
+</aside>
 
-                </div>
+<!--=========================================
+PRODUCTOS
+==========================================-->
 
-            </div>
+<div class="catalogo-contenido">
 
-        </div>
+<div class="catalogo-header">
 
-    </div>
+<h2>
+
+Nuestro Catálogo
+
+</h2>
+
+<select
+id="ordenar">
+
+<option value="nombre">
+
+Ordenar por Nombre
+
+</option>
+
+<option value="marca">
+
+Ordenar por Marca
+
+</option>
+
+<option value="codigo">
+
+Ordenar por Código
+
+</option>
+
+<option value="destacados">
+
+Solo Destacados
+
+</option>
+
+</select>
+
+</div>
+
+<div
+id="productos"
+class="productos-grid">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
-<!-- ==================================================
-NOSOTROS
-=================================================== -->
 
-<section class="nosotros" id="nosotros">
+<!--=========================================
+MARCAS
+==========================================-->
+
+<section
+id="marcas"
+class="marcas">
+
+<div class="contenedor">
+
+<div class="titulo-seccion">
+
+<span class="subtitulo">
+
+Trabajamos con
+
+</span>
+
+<h2>
+
+Principales Marcas
+
+</h2>
+
+</div>
+
+<div class="marcas-grid">
+
+<div
+class="marca-card"
+data-marca="Honda">
+
+<img
+src="imagenes/marcas/honda.png"
+alt="Honda">
+
+</div>
+
+<div
+class="marca-card"
+data-marca="Yamaha">
+
+<img
+src="imagenes/marcas/yamaha.png"
+alt="Yamaha">
+
+</div>
+
+<div
+class="marca-card"
+data-marca="Bajaj">
+
+<img
+src="imagenes/marcas/bajaj.png"
+alt="Bajaj">
+
+</div>
+
+<div
+class="marca-card"
+data-marca="Suzuki">
+
+<img
+src="imagenes/marcas/suzuki.png"
+alt="Suzuki">
+
+</div>
+
+<div
+class="marca-card"
+data-marca="Motomel">
+
+<img
+src="imagenes/marcas/motomel.png"
+alt="Motomel">
+
+</div>
+
+<div
+class="marca-card"
+data-marca="Corven">
+
+<img
+src="imagenes/marcas/corven.png"
+alt="Corven">
+
+</div>
+
+<div
+class="marca-card"
+data-marca="Gilera">
+
+<img
+src="imagenes/marcas/gilera.png"
+alt="Gilera">
+
+</div>
+
+<div
+class="marca-card"
+data-marca="Benelli">
+
+<img
+src="imagenes/marcas/benelli.png"
+alt="Benelli">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!--=========================================
+NOSOTROS
+==========================================-->
+
+<section id="nosotros" class="nosotros">
 
     <div class="contenedor">
 
@@ -450,7 +486,9 @@ NOSOTROS
 
             <div class="nosotros-img">
 
-                <img src="imagenes/local.jpg" alt="ARUANI Repuestos">
+                <img
+                    src="imagenes/local.jpg"
+                    alt="Aruani Repuestos">
 
             </div>
 
@@ -458,31 +496,36 @@ NOSOTROS
 
                 <span class="subtitulo">
 
-                    SOBRE NOSOTROS
+                    Sobre Nosotros
 
                 </span>
 
                 <h2>
 
-                    Más que una casa de repuestos.
+                    Más que una repuestera, un aliado para tu moto.
 
                 </h2>
 
                 <p>
 
-                    En <strong>ARUANI REPUESTOS</strong> trabajamos todos los días para brindar a nuestros clientes repuestos de calidad para motocicletas de distintas marcas y modelos.
+                    En <strong>ARUANI REPUESTOS</strong> trabajamos para ofrecer
+                    repuestos de calidad para motocicletas de las principales
+                    marcas del mercado.
 
                 </p>
 
                 <p>
 
-                    Nuestro objetivo es ayudarte a encontrar rápidamente el repuesto correcto, brindándote asesoramiento personalizado y una atención rápida por WhatsApp.
+                    Nuestro objetivo es ayudarte a encontrar el repuesto correcto,
+                    brindando asesoramiento y atención personalizada para cada cliente.
 
                 </p>
 
                 <p>
 
-                    Comercializamos repuestos originales y alternativos para motos Honda, Yamaha, Bajaj, Motomel, Corven, Gilera, Benelli y muchas otras marcas.
+                    Contamos con una amplia variedad de repuestos para motos Honda,
+                    Yamaha, Bajaj, Motomel, Corven, Gilera, Benelli, Suzuki,
+                    Kawasaki, KTM y muchas más.
 
                 </p>
 
@@ -490,25 +533,49 @@ NOSOTROS
 
                     <div>
 
-                        <h3>5000+</h3>
+                        <h3>
 
-                        <span>Repuestos</span>
+                            +1000
+
+                        </h3>
+
+                        <span>
+
+                            Repuestos
+
+                        </span>
 
                     </div>
 
                     <div>
 
-                        <h3>50+</h3>
+                        <h3>
 
-                        <span>Marcas</span>
+                            +20
+
+                        </h3>
+
+                        <span>
+
+                            Marcas
+
+                        </span>
 
                     </div>
 
                     <div>
 
-                        <h3>100%</h3>
+                        <h3>
 
-                        <span>Asesoramiento</span>
+                            100%
+
+                        </h3>
+
+                        <span>
+
+                            Atención Personalizada
+
+                        </span>
 
                     </div>
 
@@ -522,137 +589,101 @@ NOSOTROS
 
 </section>
 
-<!-- ==================================================
-CONTACTO
-=================================================== -->
+<!--=========================================
+VENTAJAS
+==========================================-->
 
-<section class="contacto" id="contacto">
+<section class="ventajas">
 
     <div class="contenedor">
 
         <div class="titulo-seccion">
 
-            <span>CONTACTO</span>
+            <span class="subtitulo">
+
+                ¿Por qué elegirnos?
+
+            </span>
 
             <h2>
 
-                ¿Necesitas ayuda?
+                Lo que nos diferencia
 
             </h2>
 
-            <p>
-
-                Estamos disponibles para asesorarte en la compra del repuesto correcto para tu moto.
-
-            </p>
-
         </div>
 
-        <div class="contacto-grid">
+        <div class="ventajas-grid">
 
-            <div class="info-contacto">
+            <div class="ventaja">
 
-                <div class="dato">
+                <i class="fas fa-motorcycle"></i>
 
-                    <i class="fas fa-location-dot"></i>
+                <h3>
 
-                    <div>
+                    Gran variedad
 
-                        <h4>Dirección</h4>
+                </h3>
 
-                        <p>
+                <p>
 
-                            Agrega aquí la dirección de tu local.
+                    Repuestos para múltiples marcas y modelos de motocicletas.
 
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="dato">
-
-                    <i class="fas fa-phone"></i>
-
-                    <div>
-
-                        <h4>Teléfono</h4>
-
-                        <p>
-
-                            +54 9 261 000-0000
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="dato">
-
-                    <i class="fab fa-whatsapp"></i>
-
-                    <div>
-
-                        <h4>WhatsApp</h4>
-
-                        <p>
-
-                            Consultas y asesoramiento.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="dato">
-
-                    <i class="fas fa-clock"></i>
-
-                    <div>
-
-                        <h4>Horarios</h4>
-
-                        <p>
-
-                            Lunes a Viernes
-
-                            <br>
-
-                            09:00 a 18:00 hs.
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <a
-
-                    href="https://wa.me/5492610000000"
-
-                    target="_blank"
-
-                    class="btnWhatsappGrande">
-
-                    <i class="fab fa-whatsapp"></i>
-
-                    Consultar por WhatsApp
-
-                </a>
+                </p>
 
             </div>
 
-            <div class="mapa">
+            <div class="ventaja">
 
-                <iframe
+                <i class="fas fa-award"></i>
 
-                    src="https://www.google.com/maps?q=Mendoza&output=embed"
+                <h3>
 
-                    loading="lazy">
+                    Calidad
 
-                </iframe>
+                </h3>
+
+                <p>
+
+                    Trabajamos con productos originales y alternativas de excelente calidad.
+
+                </p>
+
+            </div>
+
+            <div class="ventaja">
+
+                <i class="fas fa-headset"></i>
+
+                <h3>
+
+                    Asesoramiento
+
+                </h3>
+
+                <p>
+
+                    Te ayudamos a encontrar el repuesto correcto para tu moto.
+
+                </p>
+
+            </div>
+
+            <div class="ventaja">
+
+                <i class="fab fa-whatsapp"></i>
+
+                <h3>
+
+                    Atención rápida
+
+                </h3>
+
+                <p>
+
+                    Consultanos directamente por WhatsApp para resolver tus dudas.
+
+                </p>
 
             </div>
 
@@ -662,9 +693,9 @@ CONTACTO
 
 </section>
 
-<!-- ==================================================
-BANNER FINAL
-=================================================== -->
+<!--=========================================
+BANNER
+==========================================-->
 
 <section class="banner-final">
 
@@ -674,23 +705,20 @@ BANNER FINAL
 
             <h2>
 
-                ¿No encontraste el repuesto que buscabas?
+                ¿No encontrás el repuesto que buscás?
 
             </h2>
 
             <p>
 
-                Escríbenos por WhatsApp y nuestro equipo te ayudará a encontrarlo.
+                Escribinos por WhatsApp y nuestro equipo te ayudará a encontrarlo.
 
             </p>
 
             <a
-
-                href="https://wa.me/5492615652780"
-
+                href="https://wa.me/5492610000000"
                 target="_blank"
-
-                class="btn amarillo">
+                class="btn">
 
                 <i class="fab fa-whatsapp"></i>
 
@@ -703,34 +731,186 @@ BANNER FINAL
     </div>
 
 </section>
-<!-- ==================================================
-FOOTER
-=================================================== -->
+<!--=========================================
+CONTACTO
+==========================================-->
 
-<footer>
+<section id="contacto" class="contacto">
+
+    <div class="contenedor">
+
+        <div class="titulo-seccion">
+
+            <span class="subtitulo">
+
+                Contacto
+
+            </span>
+
+            <h2>
+
+                Estamos para ayudarte
+
+            </h2>
+
+        </div>
+
+        <div class="contacto-grid">
+
+            <div class="info-contacto">
+
+                <div class="item-contacto">
+
+                    <i class="fas fa-map-marker-alt"></i>
+
+                    <div>
+
+                        <h3>Dirección</h3>
+
+                        <p>Agregar dirección del local</p>
+
+                    </div>
+
+                </div>
+
+                <div class="item-contacto">
+
+                    <i class="fas fa-phone"></i>
+
+                    <div>
+
+                        <h3>Teléfono</h3>
+
+                        <p>+54 9 XXX XXX XXXX</p>
+
+                    </div>
+
+                </div>
+
+                <div class="item-contacto">
+
+                    <i class="fab fa-whatsapp"></i>
+
+                    <div>
+
+                        <h3>WhatsApp</h3>
+
+                        <p>+54 9 XXX XXX XXXX</p>
+
+                    </div>
+
+                </div>
+
+                <div class="item-contacto">
+
+                    <i class="fas fa-envelope"></i>
+
+                    <div>
+
+                        <h3>Email</h3>
+
+                        <p>info@aruanirepuestos.com</p>
+
+                    </div>
+
+                </div>
+
+                <div class="item-contacto">
+
+                    <i class="fas fa-clock"></i>
+
+                    <div>
+
+                        <h3>Horario</h3>
+
+                        <p>
+
+                            Lunes a Viernes
+
+                            <br>
+
+                            09:00 a 18:00 hs
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mapa">
+
+                <iframe
+                    src="https://www.google.com/maps?q=Argentina&output=embed"
+                    loading="lazy"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--=========================================
+FOOTER
+==========================================-->
+
+<footer class="footer">
 
     <div class="contenedor">
 
         <div class="footer-grid">
 
-            <!-- LOGO -->
-
             <div>
 
                 <img
-
-                    src="imagenes/logo.png"
-
-                    alt="ARUANI"
-
-                    class="footer-logo">
+                    src="imagenes/logo-blanco.png"
+                    class="footer-logo"
+                    alt="Aruani Repuestos">
 
                 <p>
 
-                    ARUANI Repuestos es un catálogo online pensado para ayudarte
-                    a encontrar rápidamente el repuesto correcto para tu moto.
+                    Catálogo online de repuestos para motocicletas.
 
                 </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Navegación
+
+                </h3>
+
+                <ul>
+
+                    <li><a href="#inicio">Inicio</a></li>
+
+                    <li><a href="#catalogo">Catálogo</a></li>
+
+                    <li><a href="#marcas">Marcas</a></li>
+
+                    <li><a href="#nosotros">Nosotros</a></li>
+
+                    <li><a href="#contacto">Contacto</a></li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Redes Sociales
+
+                </h3>
 
                 <div class="redes">
 
@@ -752,95 +932,7 @@ FOOTER
 
                     </a>
 
-                    <a href="#">
-
-                        <i class="fab fa-tiktok"></i>
-
-                    </a>
-
                 </div>
-
-            </div>
-
-            <!-- ENLACES -->
-
-            <div>
-
-                <h4>
-
-                    Navegación
-
-                </h4>
-
-                <a href="#inicio">
-
-                    Inicio
-
-                </a>
-
-                <a href="#catalogo">
-
-                    Catálogo
-
-                </a>
-
-                <a href="#marcas">
-
-                    Marcas
-
-                </a>
-
-                <a href="#nosotros">
-
-                    Nosotros
-
-                </a>
-
-                <a href="#contacto">
-
-                    Contacto
-
-                </a>
-
-            </div>
-
-            <!-- INFORMACIÓN -->
-
-            <div>
-
-                <h4>
-
-                    Información
-
-                </h4>
-
-                <p>
-
-                    📍 Mendoza - Argentina
-
-                </p>
-
-                <p>
-
-                    📱 +54 9 261 000 0000
-
-                </p>
-
-                <p>
-
-                    ✉ contacto@aruani.com
-
-                </p>
-
-                <p>
-
-                    🕒 Lunes a Viernes
-
-                    <br>
-
-                    09:00 a 18:00 hs
-
-                </p>
 
             </div>
 
@@ -848,11 +940,7 @@ FOOTER
 
         <div class="copyright">
 
-            © 2025 ARUANI REPUESTOS
-
-            <br>
-
-            Todos los derechos reservados.
+            © 2026 ARUANI REPUESTOS - Todos los derechos reservados.
 
         </div>
 
@@ -860,9 +948,21 @@ FOOTER
 
 </footer>
 
-<!-- ==================================================
-BOTÓN WHATSAPP
-=================================================== -->
+<!--=========================================
+BOTÓN VOLVER ARRIBA
+==========================================-->
+
+<button
+id="btnTop"
+class="btn-top">
+
+<i class="fas fa-arrow-up"></i>
+
+</button>
+
+<!--=========================================
+WHATSAPP FLOTANTE
+==========================================-->
 
 <a
 
@@ -875,54 +975,154 @@ class="whatsapp-float">
 <i class="fab fa-whatsapp"></i>
 
 </a>
+<!--=========================================
+MODAL PRODUCTO
+==========================================-->
 
-<!-- ==================================================
-BOTÓN VOLVER ARRIBA
-=================================================== -->
+<div id="lightbox" class="lightbox">
 
-<button id="btnTop">
+    <div class="lightbox-overlay"></div>
 
-<i class="fas fa-chevron-up"></i>
+    <div class="lightbox-container">
 
-</button>
+        <button
+            class="lightbox-close"
+            onclick="cerrarProducto()">
 
-<!-- ==================================================
+            <i class="fas fa-times"></i>
+
+        </button>
+
+        <div id="lightboxContenido">
+
+            <!-- app.js carga aquí el producto -->
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--=========================================
+LOADER
+==========================================-->
+
+<div id="loader" class="loader">
+
+    <div class="spinner"></div>
+
+    <p>
+
+        Cargando catálogo...
+
+    </p>
+
+</div>
+
+<!--=========================================
+MENSAJE SIN RESULTADOS
+==========================================-->
+
+<template id="templateSinResultados">
+
+    <div class="sin-resultados">
+
+        <i class="fas fa-box-open"></i>
+
+        <h2>
+
+            No encontramos productos
+
+        </h2>
+
+        <p>
+
+            Intenta realizar otra búsqueda.
+
+        </p>
+
+    </div>
+
+</template>
+
+<!--=========================================
+PLANTILLA DE ERROR
+==========================================-->
+
+<template id="templateError">
+
+    <div class="sin-resultados">
+
+        <i class="fas fa-circle-exclamation"></i>
+
+        <h2>
+
+            Ocurrió un error
+
+        </h2>
+
+        <p>
+
+            No fue posible cargar el catálogo.
+
+        </p>
+
+    </div>
+
+</template>
+
+<!--=========================================
+TOAST
+==========================================-->
+
+<div id="toast" class="toast">
+
+    <span id="toastTexto">
+
+        Mensaje
+
+    </span>
+
+</div>
+
+<!--=========================================
+OVERLAY MENÚ MÓVIL
+==========================================-->
+
+<div id="overlayMenu" class="overlay-menu"></div>
+<!--=========================================
 SCRIPTS
-=================================================== -->
+==========================================-->
 
 <script src="js/app.js"></script>
 
+<!--=========================================
+CONFIGURACIÓN INICIAL
+==========================================-->
+
 <script>
 
-const btnTop=document.getElementById("btnTop");
+document.addEventListener("DOMContentLoaded", () => {
 
-window.addEventListener("scroll",()=>{
+    console.log("%cARUANI STORE V6",
+        "color:#f39c12;font-size:18px;font-weight:bold");
 
-if(window.scrollY>400){
-
-btnTop.classList.add("mostrar");
-
-}else{
-
-btnTop.classList.remove("mostrar");
-
-}
-
-});
-
-btnTop.addEventListener("click",()=>{
-
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
-
-});
+    console.log("Sistema iniciado correctamente.");
 
 });
 
 </script>
+
+<!--=========================================
+PRELOAD DE IMÁGENES IMPORTANTES
+==========================================-->
+
+<link rel="preload" href="imagenes/logo.png" as="image">
+<link rel="preload" href="imagenes/hero.png" as="image">
+
+<!--=========================================
+FIN DEL SITIO
+==========================================-->
 
 </body>
 

@@ -1,195 +1,161 @@
-
-/* ======================================================
-   ARUANI STORE 2.0
-   app.js
-====================================================== */
+/* ============================================
+   ARUANI STORE v2
+============================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const contenedorProductos = document.getElementById("productos");
-    const contador = document.getElementById("contador");
+    const grid = document.getElementById("productos");
     const buscador = document.getElementById("buscar");
-
-    //==============================
-    // Mostrar productos
-    //==============================
-
-    function mostrarProductos(lista){
-
-        contenedorProductos.innerHTML = "";
-
-        if(lista.length === 0){
-
-            contenedorProductos.innerHTML = `
-                <div class="sin-resultados">
-                    <h2>No se encontraron productos.</h2>
-                </div>
-            `;
-
-            contador.textContent = "0 Productos";
-
-            return;
-
-        }
-
-        lista.forEach(producto => {
-
-            const tarjeta = document.createElement("div");
-
-            tarjeta.className = "producto";
-
-            tarjeta.innerHTML = `
-
-                <div class="producto-imagen">
-
-                    ${
-                        producto.destacado
-                        ? `<div class="badge destacado">DESTACADO</div>`
-                        : ""
-                    }
-
-                    <img
-                        src="${producto.imagen}"
-                        alt="${producto.nombre}"
-                    >
-
-                </div>
-
-                <div class="producto-info">
-
-                    <span>${producto.marca}</span>
-
-                    <h3>${producto.nombre}</h3>
-
-                    <p>${producto.descripcion}</p>
-
-                    <div class="producto-datos">
-
-                        <div>
-
-                            <strong>Categoría</strong>
-
-                            <span>${producto.categoria}</span>
-
-                        </div>
-
-                        <div>
-
-                            <strong>Código</strong>
-
-                            <span>${producto.codigo}</span>
-
-                        </div>
-
-                        <div>
-
-                            <strong>Stock</strong>
-
-                            <span>
-
-                                ${
-                                    producto.stock
-                                    ? "Disponible"
-                                    : "Consultar"
-                                }
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <button
-                        class="btn-producto"
-                        onclick="consultarWhatsApp('${producto.nombre}','${producto.codigo}')">
-
-                        <i class="fab fa-whatsapp"></i>
-
-                        Consultar
-
-                    </button>
-
-                </div>
-
-            `;
-
-            contenedorProductos.appendChild(tarjeta);
-
-        });
-
-        contador.textContent = `${lista.length} Productos`;
-
-    }
-
-    //==============================
-    // Buscador
-    //==============================
-
-    buscador.addEventListener("keyup", () => {
-
-        const texto = buscador.value.toLowerCase();
-
-        const resultado = productos.filter(producto =>
-
-            producto.nombre.toLowerCase().includes(texto)
-
-            ||
-
-            producto.marca.toLowerCase().includes(texto)
-
-            ||
-
-            producto.categoria.toLowerCase().includes(texto)
-
-            ||
-
-            producto.codigo.toLowerCase().includes(texto)
-
-        );
-
-        mostrarProductos(resultado);
-
-    });
-
-    //==============================
-    // Inicio
-    //==============================
+    const contador = document.getElementById("contador");
 
     mostrarProductos(productos);
 
+    buscador.addEventListener("input", buscarProductos);
+
 });
 
+function mostrarProductos(lista){
 
-//==========================================
-// WhatsApp
-//==========================================
+    const grid = document.getElementById("productos");
 
-function consultarWhatsApp(nombre,codigo){
+    const contador = document.getElementById("contador");
 
-    const mensaje =
+    grid.innerHTML="";
 
-`Hola ARUANI 👋
+    contador.textContent=lista.length+" Productos";
 
-Estoy interesado en el siguiente repuesto.
+    if(lista.length===0){
+
+        grid.innerHTML=`
+        <div class="sin-resultados">
+            No se encontraron productos.
+        </div>`;
+
+        return;
+
+    }
+
+    lista.forEach(producto=>{
+
+        grid.innerHTML+=`
+
+<div class="producto">
+
+<div class="producto-imagen">
+
+${producto.destacado ? `<div class="badge destacado">DESTACADO</div>`:""}
+
+<img src="${producto.imagen}" alt="${producto.nombre}">
+
+</div>
+
+<div class="producto-info">
+
+<span class="marca">${producto.marca}</span>
+
+<h3>${producto.nombre}</h3>
+
+<p class="codigo">
+Código: ${producto.codigo}
+</p>
+
+<p class="stock">
+
+${producto.stock ?
+
+`<span style="color:#2ecc71;">✔ Disponible</span>`
+
+:
+
+`<span style="color:#e74c3c;">Consultar Stock</span>`
+
+}
+
+</p>
+
+<button
+
+class="btn-producto"
+
+onclick="consultar('${producto.nombre}','${producto.codigo}')">
+
+<i class="fab fa-whatsapp"></i>
+
+Consultar
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+    });
+
+}
+
+function buscarProductos(){
+
+    const texto=document
+    .getElementById("buscar")
+    .value
+    .toLowerCase();
+
+    const resultado=productos.filter(p=>{
+
+        return(
+
+            p.nombre.toLowerCase().includes(texto)
+
+            ||
+
+            p.marca.toLowerCase().includes(texto)
+
+            ||
+
+            p.codigo.toLowerCase().includes(texto)
+
+            ||
+
+            p.categoria.toLowerCase().includes(texto)
+
+        );
+
+    });
+
+    mostrarProductos(resultado);
+
+}
+
+function consultar(nombre,codigo){
+
+    const telefono="5492610000000";
+
+    const mensaje=`
+
+Hola ARUANI.
+
+Quiero consultar por este repuesto.
 
 Producto:
+
 ${nombre}
 
 Código:
+
 ${codigo}
 
-¿Podrían informarme disponibilidad?
+Muchas gracias.
 
-Muchas gracias.`;
-
-    const telefono = "5492610000000";
+`;
 
     window.open(
 
-        `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`,
+`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`,
 
-        "_blank"
+"_blank"
 
-    );
+);
 
 }

@@ -1,265 +1,269 @@
-/* =====================================================
-   ARUANI STORE V3
-===================================================== */
+/*=========================================================
+ ARUANI STORE V5
+ APP.JS
+ PARTE 1
+=========================================================*/
 
-document.addEventListener("DOMContentLoaded", () => {
+/*=========================================================
+ CONFIGURACIÓN
+=========================================================*/
 
-    const contenedor = document.getElementById("productos");
-    const buscador = document.getElementById("buscar");
-    const contador = document.getElementById("contador");
+const CONFIG = {
 
-    crearModal();
+    archivoProductos: "data/productos.json",
 
-    mostrarProductos(productos);
+    imagenPorDefecto: "imagenes/productos/sin-foto.webp",
 
-    if (buscador) {
-        buscador.addEventListener("input", buscarProductos);
-    }
+    whatsapp: "5492610000000"
 
-    function mostrarProductos(lista){
+};
 
-        contenedor.innerHTML="";
+/*=========================================================
+ VARIABLES GLOBALES
+=========================================================*/
 
-        if(contador){
-            contador.textContent=`${lista.length} Productos`;
+let productos = [];
+
+let productosFiltrados = [];
+
+let marcaSeleccionada = "Todas";
+
+let categoriaSeleccionada = "Todas";
+
+/*=========================================================
+ ELEMENTOS DEL DOM
+=========================================================*/
+
+const contenedorProductos = document.getElementById("productos");
+
+const buscador = document.getElementById("buscar");
+
+const contador = document.getElementById("contador");
+
+const sliderDestacados = document.getElementById("sliderDestacados");
+
+/*=========================================================
+ CARGAR PRODUCTOS
+=========================================================*/
+
+async function cargarProductos(){
+
+    try{
+
+        const respuesta = await fetch(CONFIG.archivoProductos);
+
+        if(!respuesta.ok){
+
+            throw new Error("No se pudo cargar productos.json");
+
         }
 
-        if(lista.length===0){
+        productos = await respuesta.json();
 
-            contenedor.innerHTML=`
-            <div class="sin-resultados">
-                <h2>No se encontraron productos</h2>
+        productosFiltrados = [...productos];
+
+        mostrarProductos(productosFiltrados);
+
+        actualizarContador();
+
+        mostrarDestacados();
+
+        console.log("Productos cargados:", productos.length);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        contenedorProductos.innerHTML=`
+
+        <div class="sin-resultados">
+
+            <h2>Error al cargar el catálogo</h2>
+
+            <p>Verifica el archivo productos.json</p>
+
+        </div>
+
+        `;
+
+    }
+
+}
+
+/*=========================================================
+ CREAR TARJETA
+=========================================================*/
+
+function crearTarjeta(producto){
+
+    const imagen = producto.imagenes?.length
+
+        ? producto.imagenes[0]
+
+        : CONFIG.imagenPorDefecto;
+
+    return `
+
+<div class="producto fade-up">
+
+    ${producto.destacado ? '<div class="badge">DESTACADO</div>' : ""}
+
+    <div class="producto-imagen">
+
+        <img
+
+            src="${imagen}"
+
+            alt="${producto.nombre}"
+
+            loading="lazy"
+
+            onerror="this.src='${CONFIG.imagenPorDefecto}'"
+
+        >
+
+    </div>
+
+    <div class="producto-info">
+
+        <span>
+
+            ${producto.marca}
+
+        </span>
+
+        <h3>
+
+            ${producto.nombre}
+
+        </h3>
+
+        <p>
+
+            ${producto.descripcion}
+
+        </p>
+
+        <div class="producto-datos">
+
+            <div>
+
+                <strong>Código</strong>
+
+                <span>${producto.codigo}</span>
+
             </div>
-            `;
 
-            return;
+            <div>
 
-        }
+                <strong>Categoría</strong>
 
-        lista.forEach(producto=>{
+                <span>${producto.categoria}</span>
 
-            const card=document.createElement("div");
+            </div>
 
-            card.className="producto fade-up";
+        </div>
 
-            card.innerHTML=`
+        <button
 
-                <div class="producto-imagen">
+            class="btn-producto"
 
-                    ${producto.destacado ? `<div class="badge destacado">DESTACADO</div>` : ""}
+            data-id="${producto.id}">
 
-                    <img
-                        src="${producto.imagen}"
-                        alt="${producto.nombre}"
-                        onerror="this.src='imagenes/productos/sin-foto.png';"
-                    >
+            Ver Producto
 
-                </div>
+        </button>
 
-                <div class="producto-info">
+    </div>
 
-                    <span>${producto.marca}</span>
+</div>
 
-                    <h3>${producto.nombre}</h3>
+`;
 
-                    <p>Código: <strong>${producto.codigo}</strong></p>
+}
 
-                    <div class="producto-datos">
+/*=========================================================
+ MOSTRAR PRODUCTOS
+=========================================================*/
 
-                        <div>
+function mostrarProductos(lista){
 
-                            <strong>Categoría</strong>
+    if(lista.length===0){
 
-                            <span>${producto.categoria}</span>
+        contenedorProductos.innerHTML=`
 
-                        </div>
+        <div class="sin-resultados">
 
-                        <div>
+            <h2>No encontramos productos.</h2>
 
-                            <strong>Stock</strong>
+            <p>Prueba otra búsqueda.</p>
 
-                            <span>
+        </div>
 
-                            ${producto.stock ? "✔ Disponible" : "Consultar"}
+        `;
 
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <button class="btn-producto ver-producto">
-
-                        Ver Producto
-
-                    </button>
-
-                </div>
-
-            `;
-
-            card.querySelector(".ver-producto").addEventListener("click",()=>{
-
-                abrirModal(producto);
-
-            });
-
-            contenedor.appendChild(card);
-
-        });
-
-        animarCards();
+        return;
 
     }
 
-    function buscarProductos(){
+    contenedorProductos.innerHTML=
 
-        const texto=this.value.toLowerCase();
+        lista.map(crearTarjeta).join("");
 
-        const resultado=productos.filter(p=>
+}
 
-            p.nombre.toLowerCase().includes(texto)
+/*=========================================================
+ CONTADOR
+=========================================================*/
 
-            ||
+function actualizarContador(){
 
-            p.marca.toLowerCase().includes(texto)
+    contador.innerHTML=`
 
-            ||
+        Mostrando
 
-            p.codigo.toLowerCase().includes(texto)
+        <strong>
 
-            ||
+            ${productosFiltrados.length}
 
-            p.categoria.toLowerCase().includes(texto)
+        </strong>
 
-        );
+        de
 
-        mostrarProductos(resultado);
+        ${productos.length}
 
-    }
+        productos
+
+    `;
+
+}
+
+/*=========================================================
+ PRODUCTOS DESTACADOS
+=========================================================*/
+
+function mostrarDestacados(){
+
+    if(!sliderDestacados) return;
+
+    const destacados=
+
+        productos.filter(p=>p.destacado);
+
+    sliderDestacados.innerHTML=
+
+        destacados.map(crearTarjeta).join("");
+
+}
+
+/*=========================================================
+ INICIO
+=========================================================*/
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    cargarProductos();
 
 });
-
-function consultar(nombre,codigo){
-
-    const telefono="5492610000000";
-
-    const mensaje=`Hola ARUANI 👋
-
-Estoy interesado en:
-
-${nombre}
-
-Código:
-
-${codigo}
-
-¿Podrían informarme disponibilidad?
-
-Muchas gracias.`;
-
-    window.open(
-
-`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`,
-
-"_blank"
-
-);
-
-}
-
-function crearModal(){
-
-    if(document.getElementById("modalProducto")) return;
-
-    document.body.insertAdjacentHTML("beforeend",`
-
-<div id="modalProducto" class="lightbox">
-
-<div class="modal-contenido">
-
-<span class="lightbox-close">&times;</span>
-
-<img id="modalImagen" src="">
-
-<h2 id="modalNombre"></h2>
-
-<p id="modalMarca"></p>
-
-<p id="modalCategoria"></p>
-
-<p id="modalCodigo"></p>
-
-<button id="btnWhatsappModal" class="btn-producto">
-
-Consultar por WhatsApp
-
-</button>
-
-</div>
-
-</div>
-
-`);
-
-    document.querySelector(".lightbox-close").onclick=()=>{
-
-        document.getElementById("modalProducto").classList.remove("active");
-
-    };
-
-    document.getElementById("modalProducto").addEventListener("click",(e)=>{
-
-        if(e.target.id==="modalProducto"){
-
-            e.currentTarget.classList.remove("active");
-
-        }
-
-    });
-
-}
-
-function abrirModal(producto){
-
-    document.getElementById("modalImagen").src=producto.imagen;
-
-    document.getElementById("modalImagen").onerror=function(){
-
-        this.src="imagenes/productos/sin-foto.png";
-
-    };
-
-    document.getElementById("modalNombre").textContent=producto.nombre;
-
-    document.getElementById("modalMarca").textContent="Marca: "+producto.marca;
-
-    document.getElementById("modalCategoria").textContent="Categoría: "+producto.categoria;
-
-    document.getElementById("modalCodigo").textContent="Código: "+producto.codigo;
-
-    document.getElementById("btnWhatsappModal").onclick=()=>{
-
-        consultar(producto.nombre,producto.codigo);
-
-    };
-
-    document.getElementById("modalProducto").classList.add("active");
-
-}
-
-function animarCards(){
-
-    const cards=document.querySelectorAll(".fade-up");
-
-    cards.forEach((card,index)=>{
-
-        setTimeout(()=>{
-
-            card.classList.add("visible");
-
-        },index*80);
-
-    });
-
-}

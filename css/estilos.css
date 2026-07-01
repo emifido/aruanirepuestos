@@ -1505,3 +1505,481 @@ BOTÓN TOP
     color:#000;
 
 }
+/*=========================================================
+MODAL PRODUCTO
+=========================================================*/
+
+.lightbox{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.75);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:5000;
+
+    padding:20px;
+
+}
+
+.lightbox.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.modal-contenido{
+
+    width:min(900px,100%);
+
+    background:#fff;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    animation:modalEntrada .35s ease;
+
+    box-shadow:0 30px 60px rgba(0,0,0,.30);
+
+    position:relative;
+
+    text-align:center;
+
+    padding:40px;
+
+}
+
+@keyframes modalEntrada{
+
+    from{
+
+        transform:scale(.85);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+.lightbox-close{
+
+    position:absolute;
+
+    top:18px;
+
+    right:22px;
+
+    font-size:34px;
+
+    cursor:pointer;
+
+    color:#666;
+
+    transition:.3s;
+
+}
+
+.lightbox-close:hover{
+
+    color:#000;
+
+    transform:rotate(90deg);
+
+}
+
+.modal-contenido img{
+
+    width:320px;
+
+    max-width:100%;
+
+    margin:auto;
+
+    object-fit:contain;
+
+    margin-bottom:25px;
+
+}
+
+.modal-contenido h2{
+
+    font-size:34px;
+
+    margin-bottom:20px;
+
+}
+
+.modal-contenido p{
+
+    color:var(--gris);
+
+    margin-bottom:12px;
+
+    font-size:18px;
+
+}
+
+/*=========================================================
+EFECTOS GENERALES
+=========================================================*/
+
+.producto{
+
+    opacity:0;
+
+    animation:aparecer .5s forwards;
+
+}
+
+@keyframes aparecer{
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+.producto::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(120deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent);
+
+    transform:translateX(-120%);
+
+    transition:.7s;
+
+}
+
+.producto:hover::after{
+
+    transform:translateX(120%);
+
+}
+
+/*=========================================================
+SCROLL PERSONALIZADO
+=========================================================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#ececec;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--amarillo);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#f0c000;
+
+}
+
+/*=========================================================
+SELECCIÓN DE TEXTO
+=========================================================*/
+
+::selection{
+
+    background:var(--amarillo);
+
+    color:#000;
+
+}
+
+/*=========================================================
+RESPONSIVE TABLET
+=========================================================*/
+
+@media(max-width:1100px){
+
+.hero-grid{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+.hero-botones{
+
+justify-content:center;
+
+}
+
+.hero-imagen{
+
+max-width:500px;
+
+margin:auto;
+
+}
+
+.catalogo-layout{
+
+grid-template-columns:1fr;
+
+}
+
+.filtros{
+
+position:relative;
+
+top:0;
+
+}
+
+.contacto-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.nosotros-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.footer-grid{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+.estadisticas-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+/*=========================================================
+RESPONSIVE CELULAR
+=========================================================*/
+
+@media(max-width:768px){
+
+section{
+
+padding:70px 0;
+
+}
+
+.header{
+
+position:relative;
+
+}
+
+.navbar{
+
+height:auto;
+
+padding:20px 0;
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+.menu{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:18px;
+
+}
+
+.hero{
+
+padding-top:70px;
+
+}
+
+.hero h1{
+
+font-size:38px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+.hero-botones{
+
+flex-direction:column;
+
+}
+
+.titulo-seccion h2{
+
+font-size:30px;
+
+}
+
+.catalogo-header{
+
+flex-direction:column;
+
+gap:20px;
+
+text-align:center;
+
+}
+
+.productos-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.marcas-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.estadisticas-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.estadisticas{
+
+flex-direction:column;
+
+}
+
+.footer-grid{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+.redes{
+
+justify-content:center;
+
+}
+
+.whatsapp-float{
+
+width:58px;
+
+height:58px;
+
+font-size:26px;
+
+}
+
+#btnTop{
+
+bottom:95px;
+
+}
+
+}
+
+/*=========================================================
+RESPONSIVE CELULAR PEQUEÑO
+=========================================================*/
+
+@media(max-width:480px){
+
+.hero h1{
+
+font-size:30px;
+
+}
+
+.btn{
+
+width:100%;
+
+}
+
+.marca-card{
+
+padding:20px;
+
+}
+
+.modal-contenido{
+
+padding:25px;
+
+}
+
+.modal-contenido h2{
+
+font-size:26px;
+
+}
+
+.modal-contenido img{
+
+width:220px;
+
+}
+
+}
+
+/*=========================================================
+FIN CSS V4
+=========================================================*/
